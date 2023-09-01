@@ -19,7 +19,7 @@ export function ExternalLink({ link, className, ...rest }: Props) {
       className={clsx("cursor-pointer", className)}
       {...rest}
     >
-      <ExternalLinkIcon height={"20px"} width={"20px"} />
+      <ExternalLinkIcon height={"23px"} width={"23px"} />
     </a>
   );
 }

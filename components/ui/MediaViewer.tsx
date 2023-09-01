@@ -22,7 +22,7 @@ export const MediaViewer = ({ url, isVideo = false }: Props) => {
 
   return (
     <img
-      className="aspect-square rounded-xl object-cover"
+      className="aspect-square rounded-2xl object-cover"
       src={url}
       alt="token image"
       width={1080}

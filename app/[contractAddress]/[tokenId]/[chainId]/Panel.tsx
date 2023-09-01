@@ -54,23 +54,33 @@ export const Panel = ({
     <div
       className={clsx(
         className,
-        "custom-scroll relative h-full space-y-3 overflow-y-auto rounded-t-[40px] border-t-0 bg-black-bg text-white px-6 pt-6 bg-[url('/bg-circle.svg'),url('/gridpattern.svg')] bg-cover"
+        "custom-scroll relative h-full space-y-3 overflow-y-auto rounded-t-[40px] max-[440px]:rounded-t-[32px] border-t-0 bg-black-bg text-white px-6 pt-6 bg-[url('/bg-circle.svg'),url('/gridpattern.svg')] bg-cover"
       )}
     >
       <div className=" mb-6 h-[5px] w-[50px] rounded-full bg-white/80 mx-auto" />
 
-      <h1 className="text-lg uppercase text-gray-text/80 font-semibold">{title}</h1>
+      <h1 className="text-lg max-[440px]:text-base uppercase text-gray-text/80 font-semibold">
+        {title}
+      </h1>
 
       <div className="flex items-center justify-between !-mt-1 !mb-4">
         <div className="flex ">
-          <Image src="/galverse-logo-white.svg" alt="logo" width={36} height={36} />
-          <h2 className="text-5xl uppercase font-bold ml-2">Inventory</h2>
+          <Image
+            src="/galverse-logo-white.svg"
+            alt="logo"
+            width={36}
+            height={36}
+            className="max-[440px]:h-[30px] max-[440px]:w[30px]"
+          />
+          <h2 className="text-[clamp(1.5rem,-1rem+10vw,3rem)] leading-[1] uppercase font-bold ml-2 ">
+            Inventory
+          </h2>
         </div>
 
         {account && displayedAddress && (
           <div className="flex items-center justify-start space-x-2">
             <span
-              className="inline-block rounded-full bg-[#202020] px-5 py-2 font-secondary text-base font-bold uppercase text-gray-text hover:cursor-pointer"
+              className="inline-block rounded-full bg-[#202020] hover:bg-opacity-80 px-5 py-2 max-[440px]:px-[16px] max-[440px]:py-[6px] font-secondary text-base max-[440px]:text-[14px] font-bold uppercase text-gray-text hover:text-white hover:cursor-pointer transition-all duration-200"
               onClick={() => {
                 const textarea = document.createElement("textarea");
                 textarea.textContent = account;
@@ -101,7 +111,7 @@ export const Panel = ({
               )}
             </span>
             <ExternalLink
-              className="p-2 text-gray-text flex items-center justify-center rounded-full h-[40px] w-[40px] bg-[#202020]"
+              className="p-2 text-gray-text flex items-center justify-center rounded-full h-[40px] w-[40px] max-[440px]:h-[36px] max-[440px]:w-[36px] bg-[#202020] hover:text-white hover:bg-opacity-80 transition-all duration-200"
               link={etherscanLink}
             />
           </div>
@@ -147,7 +157,10 @@ export const Panel = ({
               const openseaUrl = `${chainIdToOpenseaAssetUrl[chainId]}/${t.contract.address}/${t.tokenId}`;
 
               return (
-                <li key={`${t.contract.address}-${t.tokenId}-${i}`} className="list-none">
+                <li
+                  key={`${t.contract.address}-${t.tokenId}-${i}`}
+                  className="list-none transition-all duration-150 hover:border-b-[5px] sm:hover:border-b-[6px] hover:border-2 rounded-2xl border-white "
+                >
                   <a href={openseaUrl} target="_blank" className="cursor-pointer">
                     <MediaViewer url={media} isVideo={isVideo} />
                   </a>

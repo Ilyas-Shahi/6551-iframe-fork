@@ -9,7 +9,10 @@ export const GalverseLogo = ({
   ...rest
 }: Props): React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> => {
   return (
-    <div className={clsx("h-[30px] w-[30px]", className)} {...rest}>
+    <div
+      className={clsx("h-[30px] w-[30px] max-[440px]:h-[24px] max-[440px]:w-[24px]", className)}
+      {...rest}
+    >
       <svg
         // width="670"
         // height="670"

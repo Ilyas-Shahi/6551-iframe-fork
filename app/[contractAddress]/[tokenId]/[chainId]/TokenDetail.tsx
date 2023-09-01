@@ -18,7 +18,7 @@ interface Props {
 
 const variants = {
   closed: { y: "100%", transition: { duration: 0.75 } },
-  open: { y: "0", transition: { duration: 0.75 }, height: "85%" },
+  open: { y: "0", transition: { duration: 0.75 } },
 } as Variants;
 
 const iconVariant = {
@@ -62,14 +62,14 @@ export const TokenDetail = ({
         <Image
           src="/close.svg"
           alt="close-icon"
-          width={54}
-          height={54}
+          width={46}
+          height={46}
           onClick={() => handleOpenClose(false)}
-          className="absolute left-4 top-4 z-10 p-2 rounded-full bg-black/60 cursor-pointer hover:bg-black transition-all duration-200"
+          className="absolute left-4 top-4 z-10 p-2 rounded-full bg-black/60 cursor-pointer hover:bg-black transition-all duration-200 max-[440px]:h-[36px] max-[440px]:w-[36px]"
         />
       ) : (
         <motion.div
-          className="absolute left-4 top-4 z-10 p-3 rounded-full bg-white/40 cursor-pointer"
+          className="absolute left-4 top-4 z-10 p-2 rounded-full bg-white/40 cursor-pointer max-[440px]:p-[6px]"
           whileHover="hover"
           variants={iconVariant}
           initial="unHovered"
@@ -80,7 +80,7 @@ export const TokenDetail = ({
 
       {isOpen && (
         <motion.div
-          className={`custom-scroll absolute bottom-0 z-10 w-full max-w-[1080px] overflow-y-auto`}
+          className={`custom-scroll absolute bottom-0 z-10 w-full max-w-[1080px] overflow-y-auto h-[85%] max-[440px]:h-[82%]`}
           animate={currentAnimate}
           variants={variants}
           initial="closed"

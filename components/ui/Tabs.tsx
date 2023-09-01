@@ -11,8 +11,8 @@ export const Tabs = ({ tabs, currentTab, onTabChange, ...props }: Props) => {
       {tabs.map((tab) => {
         return (
           <li
-            className={`relative list-none w-full text-lg text-center font-secondary font-bold uppercase hover:cursor-pointer pb-5 ${
-              currentTab === tab ? "text-white" : "text-gray-text"
+            className={`relative list-none w-full text-lg text-center font-secondary font-bold uppercase hover:cursor-pointer pb-5 transition-all duration-200 ${
+              currentTab === tab ? "text-white" : "text-gray-text hover:text-white"
             }`}
             key={tab}
             onClick={() => onTabChange(tab)}

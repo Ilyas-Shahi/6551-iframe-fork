@@ -177,7 +177,7 @@ export const Panel = ({
 
       <TabPanel value={TABS.ASSETS} currentTab={currentTab}>
         <div className="flex w-full flex-col gap-1">
-          <div className="flex w-[100%+24px] items-center justify-between py-4 px-6 -mx-6 bg-gray-300 bg-opacity-[0.02]">
+          <div className="flex w-[100%+24px] max-[440px]:w-[100%+20px] max-[385px]:w-[100%+16px] items-center justify-between py-4 px-6 bg-gray-300 bg-opacity-[0.02] -mx-6 max-[440px]:-mx-5 max-[385px]:-mx-4">
             <div className="flex items-center space-x-4">
               <img src="/ethereum-logo.png" alt="ethereum logo" className="h-[40px] w-[40px]" />
               <div className="text-xl font-medium text-white">Ethereum</div>
@@ -188,7 +188,7 @@ export const Panel = ({
           </div>
           {tokenBalanceData?.map((tokenData, i) => (
             <div
-              className="flex w-[100%+24px] items-center justify-between py-4 px-6 -mx-6 bg-gray-300 bg-opacity-[0.02]"
+              className="flex w-[100%+24px] max-[440px]:w-[100%+20px] max-[385px]:w-[100%+16px] items-center justify-between py-4 px-6 bg-gray-300 bg-opacity-[0.02] -mx-6 max-[440px]:-mx-5 max-[385px]:-mx-4"
               key={i}
             >
               <div className="flex items-center space-x-4">

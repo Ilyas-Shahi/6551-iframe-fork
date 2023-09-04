@@ -104,7 +104,7 @@ export const Panel = ({
         {account && displayedAddress && (
           <div className="flex items-center justify-start space-x-2">
             <span
-              className="inline-block rounded-full bg-[#202020] hover:bg-[#2B2B2B] px-5 py-2 max-[440px]:px-[16px] max-[385px]:px-[12px] max-[440px]:py-[6px] max-[385px]:py-[4px] font-secondary text-base max-[440px]:text-[14px] max-[385px]:text-[12px] font-bold uppercase text-gray-text/80 hover:text-gray-text hover:cursor-pointer transition-all duration-200"
+              className="inline-block rounded-full bg-[#202020] hover:bg-[#2B2B2B] px-5 py-2 max-[440px]:px-[16px] max-[385px]:px-[12px] max-[440px]:py-[6px] max-[385px]:py-[3px] font-secondary text-base max-[440px]:text-[14px] max-[385px]:text-[12px] font-bold uppercase text-gray-text/80 hover:text-gray-text hover:cursor-pointer transition-all duration-200"
               onClick={() => {
                 const textarea = document.createElement("textarea");
                 textarea.textContent = account;
@@ -115,8 +115,6 @@ export const Panel = ({
                 try {
                   document.execCommand("copy"); // Security exception may be thrown by some browsers.
                   setCopied(true);
-                  setTimeout(() => setCopied(false), 1000);
-
                   return;
                 } catch (ex) {
                   console.warn("Copy to clipboard failed.", ex);
@@ -126,13 +124,7 @@ export const Panel = ({
                 }
               }}
             >
-              {copied ? (
-                <span>
-                  <Check />
-                </span>
-              ) : (
-                shortenAddress(displayedAddress)
-              )}
+              {copied ? <span>Copied!</span> : shortenAddress(displayedAddress)}
             </span>
             <ExternalLink
               className="text-gray-text/80 flex items-center justify-center rounded-full h-[40px] w-[40px] max-[440px]:h-[36px] max-[440px]:w-[36px] max-[385px]:h-[28px] max-[385px]:w-[28px] p-2 max-[440px]:p-[7px] max-[385px]:p-1.5 bg-[#202020] hover:bg-[#2B2B2B] hover:text-gray-text transition-all duration-200"

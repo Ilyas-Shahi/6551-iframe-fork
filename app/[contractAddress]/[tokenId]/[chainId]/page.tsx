@@ -152,6 +152,7 @@ export default function Token({ params, searchParams }: TokenParams) {
               title={nftMetadata.title}
               chainId={chainIdNumber}
               logo={logo}
+              tokenId={tokenId}
             />
           )}
           <div className="max-h-1080[px] relative h-full w-full max-w-[1080px]">

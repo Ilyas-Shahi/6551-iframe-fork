@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, Exclamation, GalverseLogo } from "@/components/icon";
 import { Tabs, TabPanel, MediaViewer, ExternalLink } from "@/components/ui";
 import { TbaOwnedNft } from "@/lib/types";
@@ -17,6 +17,7 @@ import galverseLogo from "@/public/no-img.jpg";
 export const TABS = {
   COLLECTIBLES: "Collectibles",
   ASSETS: "Assets",
+  UPGRADES: "Upgrades",
 };
 
 interface Props {
@@ -26,6 +27,7 @@ interface Props {
   tokens: TbaOwnedNft[];
   title: string;
   chainId: number;
+  tokenId: string;
 }
 
 export const Panel = ({
@@ -35,9 +37,11 @@ export const Panel = ({
   tokens,
   title,
   chainId,
+  tokenId,
 }: Props) => {
   const [copied, setCopied] = useState(false);
   const [currentTab, setCurrentTab] = useState(TABS.COLLECTIBLES);
+  const [upgradeState, setUpgradeState] = useState(0);
 
   const displayedAddress = account;
 
@@ -49,6 +53,26 @@ export const Panel = ({
 
   const { data: tokenBalanceData } = useGetTokenBalances(account as `0x${string}`, chainId);
   const etherscanLink = getEtherscanLink({ chainId, address: account });
+
+  useEffect(() => {
+    async function fetchMetadata() {
+      const res = await fetch(`https://www.galverse.art/api/metadata/${tokenId}.json`);
+      const data = await res.json();
+
+      data.attributes.map((attr: { trait_type: string; value: string }) => {
+        if (attr.trait_type === "6551 Upgrade" && attr.value === "Enabled")
+          setUpgradeState((prev) => prev + 1);
+        if (attr.trait_type === "VTuber Upgrade" && attr.value === "Enabled")
+          setUpgradeState((prev) => prev + 1);
+      });
+      // console.log(upgradeState);
+      console.log(data.attributes);
+    }
+
+    if (tokenId) {
+      fetchMetadata();
+    }
+  }, [tokenId]);
 
   return (
     <div
@@ -159,7 +183,7 @@ export const Panel = ({
               return (
                 <li
                   key={`${t.contract.address}-${t.tokenId}-${i}`}
-                  className="list-none transition-all duration-200 rounded-xl hover:scale-[1.03] hover:shadow-[0px_6px_12px_0px_rgba(0,0,0,0.23),0px_23px_23px_0px_rgba(0,0,0,0.20),0px_51px_31px_0px_rgba(0,0,0,0.12),_0px_90px_36px_0px_rgba(0,0,0,0.03),0px_141px_40px_0px_rgba(0,0,0,0.00)]"
+                  className="list-none transition-all duration-200 rounded-xl overflow-hidden hover:scale-[1.03] hover:shadow-[0px_6px_12px_0px_rgba(0,0,0,0.23),0px_23px_23px_0px_rgba(0,0,0,0.20),0px_51px_31px_0px_rgba(0,0,0,0.12),_0px_90px_36px_0px_rgba(0,0,0,0.03),0px_141px_40px_0px_rgba(0,0,0,0.00)]"
                 >
                   <a href={openseaUrl} target="_blank" className="cursor-pointer">
                     <MediaViewer url={media} isVideo={isVideo} />
@@ -214,6 +238,24 @@ export const Panel = ({
               </div>
             </div>
           ))}
+        </div>
+      </TabPanel>
+
+      <TabPanel value={TABS.UPGRADES} currentTab={currentTab}>
+        <div className="flex justify-center items-center pt-[16%] max-[440px]:pt-[2%] max-[600px]:pt-[8%]">
+          <Image
+            src={
+              upgradeState == 1
+                ? "/1-upgrade.png"
+                : upgradeState == 2
+                ? "/2-upgrade.png"
+                : "/empty.png"
+            }
+            width={800}
+            height={200}
+            alt="upgrade state"
+            className="w-9/12"
+          />
         </div>
       </TabPanel>
     </div>

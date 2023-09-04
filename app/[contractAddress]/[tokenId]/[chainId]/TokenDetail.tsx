@@ -14,6 +14,7 @@ interface Props {
   title: string;
   chainId: number;
   logo?: string;
+  tokenId: string;
 }
 
 const variants = {
@@ -51,6 +52,7 @@ export const TokenDetail = ({
   title,
   chainId,
   logo,
+  tokenId,
 }: Props) => {
   let currentAnimate = isOpen ? "open" : "closed";
 
@@ -91,6 +93,7 @@ export const TokenDetail = ({
             tokens={tokens}
             title={title}
             chainId={chainId}
+            tokenId={tokenId}
           />
         </motion.div>
       )}

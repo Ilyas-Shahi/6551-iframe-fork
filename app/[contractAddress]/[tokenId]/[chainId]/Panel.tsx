@@ -111,7 +111,7 @@ export const Panel = ({
               )}
             </span>
             <ExternalLink
-              className="p-2 text-gray-text/80 flex items-center justify-center rounded-full h-[40px] w-[40px] max-[440px]:h-[36px] max-[440px]:w-[36px] max-[385px]:h-[28px] max-[385px]:w-[28px] bg-[#202020] hover:bg-[#2B2B2B] hover:text-gray-text transition-all duration-200"
+              className="text-gray-text/80 flex items-center justify-center rounded-full h-[40px] w-[40px] max-[440px]:h-[36px] max-[440px]:w-[36px] max-[385px]:h-[28px] max-[385px]:w-[28px] p-2 max-[440px]:p-[7px] max-[385px]:p-1.5 bg-[#202020] hover:bg-[#2B2B2B] hover:text-gray-text transition-all duration-200"
               link={etherscanLink}
             />
           </div>
@@ -122,9 +122,9 @@ export const Panel = ({
       <Image
         src="/double-border-dot.svg"
         alt="logo"
-        width={400}
+        width={1000}
         height={40}
-        className="w-full !my-3"
+        className="!w-full !my-3"
       />
 
       {approvalTokensCount ? (
@@ -179,10 +179,14 @@ export const Panel = ({
         <div className="flex w-full flex-col gap-1">
           <div className="flex w-[100%+24px] max-[440px]:w-[100%+20px] max-[385px]:w-[100%+16px] items-center justify-between py-4 px-6 bg-gray-300 bg-opacity-[0.02] -mx-6 max-[440px]:-mx-5 max-[385px]:-mx-4">
             <div className="flex items-center space-x-4">
-              <img src="/ethereum-logo.png" alt="ethereum logo" className="h-[40px] w-[40px]" />
-              <div className="text-xl font-medium text-white">Ethereum</div>
+              <img
+                src="/ethereum-logo.png"
+                alt="ethereum logo"
+                className="h-[40px] w-[40px] max-[440px]:h-[28px] max-[440px]:w-[28px]"
+              />
+              <div className="text-xl max-[440px]:text-lg font-medium text-white">Ethereum</div>
             </div>
-            <div className="text-xl font-bold text-white">
+            <div className="text-xl max-[440px]:text-lg font-bold text-white">
               {ethBalance ? Number(ethBalance).toFixed(2) : "0.00"}
             </div>
           </div>
@@ -193,13 +197,21 @@ export const Panel = ({
             >
               <div className="flex items-center space-x-4">
                 {tokenData.logo ? (
-                  <img src={tokenData.logo} alt="coin logo" className="h-[40px] w-[40px]" />
+                  <img
+                    src={tokenData.logo}
+                    alt="coin logo"
+                    className="h-[40px] w-[40px] max-[440px]:h-[28px] max-[440px]:w-[28px]"
+                  />
                 ) : (
                   <div className="text-3xl">💰</div>
                 )}
-                <div className="text-xl font-medium text-white">{tokenData.name || ""}</div>
+                <div className="text-xl max-[440px]:text-lg font-medium text-white">
+                  {tokenData.name || ""}
+                </div>
               </div>
-              <div className="text-xl font-bold text-white">{tokenData.balance}</div>
+              <div className="text-xl max-[440px]:text-lg font-bold text-white">
+                {tokenData.balance}
+              </div>
             </div>
           ))}
         </div>
